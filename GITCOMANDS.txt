@@ -1,0 +1,21 @@
+!! git init: Initializes a brand new, empty repository in your current folder.
+
+git clone [url]: Downloads an existing repository from the internet (like GitHub) to your computer.
+
+git status: Shows you which files have been modified, added, or deleted before you commit them.
+
+!! git add .: Stages all your modified files so they are ready to be committed.
+
+git commit -m "   ": Saves your staged changes locally with a descriptive note.
+
+git pull: Grabs the latest updates from the remote repository and merges them into your local work.
+
+git push: Uploads your local, committed changes up to the remote repository.
+
+git branch: Lists all the branches in your repository.
+
+git checkout [branch]: Switches you to a different branch (newer versions of Git also use git switch [branch]).
+
+git merge [branch]: Combines the specified branch's history into your current branch.
+
+git log: Shows the history of all past commits.

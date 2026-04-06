@@ -5,7 +5,7 @@
        //a post was made
        $errors = User::action()->login($_POST);
        if(!is_array ($errors)){
-           header('Location: login.php');
+           header('Location: index.php');
            die;
        }
    }
@@ -14,7 +14,7 @@
 
 <html>
 <head>
-    <title>Signup</title>
+    <title>Login</title>
     <meta charset="utf8">
 </head>
 <body>
@@ -72,8 +72,8 @@
             }
            ?>
         </div>
-        <input class="input" type="password" name="password" placeholder="Password" value="<?= isset($_POST['password']) ? $_POST['password'] : '' ?>"><br>
         <input class="input" type="email" name="email" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>"><br>
+        <input class="input" type="password" name="password" placeholder="Password" value="<?= isset($_POST['password']) ? $_POST['password'] : '' ?>"><br>
         <br>
         <button class="btn" type="submit">Login</button>
 

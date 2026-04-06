@@ -55,16 +55,53 @@ class User
     public function login($POST)
     {
       $errors = array();
-      $arr['password'] = $POST['password'];
+      
       $arr['email'] = trim($POST['email']);
-      //save to database
-      if(count($errors) == 0)
+      $password= $POST['password'];
+
+      //read from database
+      $data = DB::table("users")->select()->where("email= :email", $arr);
+      if(is_array($data))
       {     
-        return DB::table("users")->insert($arr); 
-     
+        $data = $data[0];
+        if($data->password == $password)
+        {
+            $ses = new Session();
+            $ses->regenerate();
+
+            $arr['username'] = $data->username;
+            $arr['email'] = $data->email;
+            $arr['logged_in'] = 1;
+
+            $ses->set('USER', $arr);
+            return true;
+
+        }
       }
+      $errors[] = "Invalid email or password";
       return $errors;
     }
+
+    public function is_logged_in()
+    {
+        $ses = new Session();
+
+        if($ses->exists('USER'))
+        {
+            $data = $ses->get('USER');
+            $email = $data['email'];
+
+            //read from database
+            $data = $this->get_by_email($email);
+            if(is_array($data))
+            {    
+                return true;
+            }
+        }
+        return false;
+
+    } 
+    
     
 
     public function update_by_id($id, $values)
@@ -79,7 +116,6 @@ class User
     public function get_all()
     {
     return DB::table('users')->select()->all();
-
     }
  
     /*
